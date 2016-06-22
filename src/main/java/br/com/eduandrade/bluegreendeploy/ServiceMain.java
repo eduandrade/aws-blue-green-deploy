@@ -45,7 +45,7 @@ public class ServiceMain {
 	}
 
 	private String getHostName() {
-		String hostname = "Unknown";
+		String hostname = "Unknown!";
 		try {
 			InetAddress addr = InetAddress.getLocalHost();
 			hostname = addr.getHostName();
