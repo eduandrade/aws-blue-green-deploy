@@ -1,4 +1,5 @@
 FROM maven:3-jdk-8-alpine
+MAINTAINER Eduardo Andrade
 
 ARG MAVEN_OPTS=""
 ENV MAVEN_OPTS ${MAVEN_OPTS}
