@@ -1,8 +1,13 @@
-FROM openjdk:8-jdk-alpine
+FROM maven:3-jdk-8-alpine
 
-COPY target /code/target
+ARG MAVEN_OPTS=""
+ENV MAVEN_OPTS ${MAVEN_OPTS}
+
+COPY . /code
 
 WORKDIR /code
+
+RUN mvn clean install
 
 EXPOSE 8080
 
