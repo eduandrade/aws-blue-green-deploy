@@ -1,10 +1,12 @@
 package br.com.eduandrade.bluegreendeploy;
 
-import static spark.Spark.*;
+import static spark.Spark.after;
+import static spark.Spark.get;
+import static spark.Spark.port;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Date;
+import java.time.Instant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,9 @@ import com.google.gson.Gson;
 public class ServiceMain {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ServiceMain.class);
-	
+
 	private static final int DEFAULT_PORT = 8080;
-	
+
 	private static final Gson GSON = new Gson();
 
 	public static void main(String[] args) {
@@ -28,19 +30,20 @@ public class ServiceMain {
 	}
 
 	private void configure() {
-		final int port = System.getenv("PORT") == null ? DEFAULT_PORT : Integer.parseInt(System.getenv("PORT"));
-		port(port);
+		port(System.getenv("PORT") == null ? DEFAULT_PORT : Integer.parseInt(System.getenv("PORT")));
 	}
 
 	private void execute() {
 		get("/info", (req, res) -> {
-			String hostName = getHostName();
-			LOG.info("/info - hostName=[{}] clientIP=[{}]", hostName, req.ip());
 			ServiceResponseInfo response = new ServiceResponseInfo();
 			response.setClientIP(req.ip());
-			response.setHostName(hostName);
-			response.setTimestamp(new Date());
+			response.setHostName(getHostName());
+			response.setTimestamp(Instant.now().toString());
+			LOG.info("/info - response=[{}]", response);
 			return GSON.toJson(response);
+		});
+		after((req, res) -> {
+			res.type("application/json");
 		});
 	}
 

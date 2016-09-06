@@ -1,12 +1,10 @@
 package br.com.eduandrade.bluegreendeploy;
 
-import java.util.Date;
-
 public class ServiceResponseInfo {
 
 	private String hostName;
 	private String clientIP;
-	private Date timestamp;
+	private String timestamp;
 	
 	public String getHostName() {
 		return hostName;
@@ -20,11 +18,17 @@ public class ServiceResponseInfo {
 	public void setClientIP(String clientIP) {
 		this.clientIP = clientIP;
 	}
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	@Override
+	public String toString() {
+		return "ServiceResponseInfo [hostName=" + hostName + ", clientIP=" + clientIP + ", timestamp=" + timestamp
+				+ "]";
 	}
 	
 }
