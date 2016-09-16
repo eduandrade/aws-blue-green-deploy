@@ -1,5 +1,7 @@
 # aws-blue-green-deploy
 
+[![CircleCI](https://circleci.com/gh/eduandrade/aws-blue-green-deploy.svg?style=svg)](https://circleci.com/gh/eduandrade/aws-blue-green-deploy)
+
 Simple REST API to evaluate Blue-Green Deployment release technique using Amazon AWS.
 
 #Building the Docker image
